@@ -1,32 +1,59 @@
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class Pioneer {
     
     public String name;
     public String bio;
-    ArrayList<Pioneer> Antagonists;
+    Hashtable<Pioneer, Beef> Beefs;
+    public String element;
+    private Location currentLocation;
 
-    public Pioneer( String name, String bio){
+    public Pioneer( String name, String element, String bio, Location currentLocation){
         this.name = name;
+        this.element = element;
         this.bio = bio;
-        ArrayList<Pioneer> Antagonists = new ArrayList<>();
+        this.currentLocation = currentLocation;
+        this.Beefs = new Hashtable<> ();
+
+
     }
 
+    public Location getLocation(){
+        return this.currentLocation;
+    }
+
+    public void setLocation(Location newLocation){
+        this.currentLocation = newLocation;
+
+    }
+ 
     public String getName(){
         return this.name;
+    }
+
+    public String getElement(){
+        return this.element;
     }
 
     public String getBio(){
         return this.bio;
     }
 
-    public void addAntagonist(Pioneer p){
-        this.Antagonists.add(p);
+    public void addAntagonist(Pioneer p, Beef b){
+        this.Beefs.put(p,b);
     }
 
-    public void resolveBeef (Pioneer p){
-        this.Antagonists.remove(p);
+    public void resolveBeef (Pioneer p, Beef b){
+        this.Beefs.remove(p, b);
+        // public boolean to tell you if it is right
     }
+
+
+
+
+    /*Pioneers that I plan to use are Lee Quiones, Sha Rock, DJ Kool Herc, Ana "Rokafella" Garcia, Crazy Legs, MC Lyte */
+    /* Locations: 1520 Segwick Ave (Bronx), Lower East Side (Manhattan), South Bronx, Inwood (Manhattan), East Flatbush (Brooklyn), Queens  */
 
 
 }
