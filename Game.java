@@ -1,5 +1,7 @@
 import java.awt.*;
 import javax.swing.JFrame;
+import javax.xml.transform.SourceLocator;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,6 +11,14 @@ public class Game {
         System.out.println("Congrats! You've been invited to the grand 50th anniversary of Hip-Hop Celebration.");
         System.out.println("Remember that there are 5 main elements of Hip-Hop: Dance, DJing, Mcing, Graffiti, and Knowledge.");
         System.out.println("Your job is to gather 1 pioneer of each of the 5 elements of Hip-Hop at the party together.");
+    }
+
+    public static void printMenu(){
+        System.out.println("Here are your options!");
+        System.out.println("Go talk to a pioneer!" );
+        System.out.println("Move to another borough. Choose left or right");
+        System.out.println("Exit");
+
     }
 
 
@@ -49,11 +59,11 @@ public class Game {
         Campbell_Cave.setLeft(Lyte_House);
         Crazy_House.setLeft(Party);
 
-        Pioneer DJ_Kool_Herc = new Pioneer("Clive Campbell", "DJing", "DJ Kool aka Clive Campbell is often considered the grandfather of Hip-Hop. He and his sister Cindy Campbell threw the Back 2 School Jam on August 11th of 1973 which is often reffered to as the birth of Hip-Hop. ", Party);
-        Pioneer MC_Lyte = new Pioneer("Lana Michele Moorer", "MCing", "MC Lyte is a female pioneer of Hip-Hop. She was the first female rapper to release a full album. ", Lyte_House);
-        Pioneer Crazy_Legs = new Pioneer("Richard Colón", "Dance", "Crazy Legs is a Puerto Rican B-Boy, and he was present of the Rock Steady Crew.", Crazy_House);
-        Pioneer Lady_Pink = new Pioneer("Sandra Fabara", "Graffiti", "Lady Pink is a female Ecuadorian-American graffiti artist.", Da_Pink_House);
-        Pioneer Cindy_Campbell = new Pioneer("Cindy Campbell", "Knowledge", "Cindy Campbell is a woman with many skills. She also happens to be the sister of Clive Campbell, and she hosted the Back 2 Jam", Campbell_Cave);
+        Pioneer DJ_Kool_Herc = new Pioneer("Clive Campbell", "DJ Kool Herc", "DJing", "DJ Kool aka Clive Campbell is often considered the grandfather of Hip-Hop. He and his sister Cindy Campbell threw the Back 2 School Jam on August 11th of 1973 which is often reffered to as the birth of Hip-Hop. ", Party);
+        Pioneer MC_Lyte = new Pioneer("Lana Michele Moorer", "MC_Lyte", "MCing", "MC Lyte is a female pioneer of Hip-Hop. She was the first female rapper to release a full album. ", Lyte_House);
+        Pioneer Crazy_Legs = new Pioneer("Richard Colón", "Crazy Legs",  "Dance", "Crazy Legs is a Puerto Rican B-Boy, and he was present of the Rock Steady Crew.", Crazy_House);
+        Pioneer Lady_Pink = new Pioneer("Sandra Fabara", "Lady Pink", "Graffiti", "Lady Pink is a female Ecuadorian-American graffiti artist.", Da_Pink_House);
+        Pioneer Cindy_Campbell = new Pioneer("Cindy Campbell", "Cindy Campbell", "Knowledge", "Cindy Campbell is a woman with many skills. She also happens to be the sister of Clive Campbell, and she hosted the Back 2 Jam", Campbell_Cave);
 
         String [] Cindy_Options = {"Have a good cry about it", "Have a conversation about the situation", "Silently fume about it."};
         Beef Cindy_Beef = new Beef("Cindy is mad at her brother because he took all the fame for the Back 2 School Jam in 1973", 1, Cindy_Options);
@@ -65,11 +75,12 @@ public class Game {
         Beef Lyte_Beef = new Beef("Cindy left me to go to Staten Island and never explained", 0, Lyte_Options);
 
 
-        Party.moveIn(DJ_Kool_Herc);
+        Party.moveIn(DJ_Kool_Herc); 
         Lyte_House.moveIn(MC_Lyte);
         Campbell_Cave.moveIn(Cindy_Campbell);
         Da_Pink_House.moveIn(Lady_Pink);
         Crazy_House.moveIn(Crazy_Legs);
+
 
 
         System.out.println("Which NYC borough would you like to start in? ");
@@ -88,15 +99,54 @@ public class Game {
         else if (response.equalsIgnoreCase("queens")){
             currentLocation = Da_Pink_House;
         }
-        else if (response.equalsIgnoreCase("campbell cave")){
+        else if (response.equalsIgnoreCase("staten_island")){
             currentLocation = Campbell_Cave;
         }
-        else if (response.equalsIgnoreCase("crazy_house")){
+        else if (response.equalsIgnoreCase("manhattan")){
             currentLocation = Crazy_House; 
         }
+        else {
+            System.out.println(" I did not understand that! Starting in The Bronx") ;
+            currentLocation = Party;
+        }
 
-        System.out.println("Welcome to " + response + "!");
-        System.out.println("A few blocks later you are now at" + currentLocation + "!");
+        System.out.println("Welcome to " + currentLocation + "!" );
+        printMenu();
+
+
+
+        while (!response.equalsIgnoreCase("exit") ){
+            response = input.nextLine();
+            //process the response 
+        }
+
+        if (response.equalsIgnoreCase("Talk to a pioneer")){
+            currentLocation.talkTo(Cindy_Campbell);
+        }
+
+        if (response.equalsIgnoreCase("exit")){
+            System.out.println("You have ended the game goodbye!");
+
+        }
+        else if (response.equalsIgnoreCase("Left")){
+            currentLocation.goLeft();
+            System.out.println(currentLocation);
+        }
+        else if (response.equalsIgnoreCase("Right")){
+            currentLocation.goRight();
+            System.out.println(currentLocation);
+        }
+
+        
+        
+
+        
+
+
+
+        // options are go left go right or talk to someone or exit
+        // print menu or available options 
+        // process input
 
 
 

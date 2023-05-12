@@ -6,7 +6,7 @@ public class Location {
     protected String name;
     protected String address;
     Borough borough;
-    ArrayList<Pioneer> party_participants;
+    ArrayList<Pioneer> pioneers;
     Location left;
     Location right;
     
@@ -15,10 +15,8 @@ public class Location {
         this.name = name;
         this.address = address;
         this.borough = borough;
-        this.party_participants = new ArrayList<>();
+        this.pioneers = new ArrayList<>();
     }
-
-
 
 
     public Location goLeft(){
@@ -29,27 +27,57 @@ public class Location {
         return this.right;
     }
 
+    public void printLocation(){
+        System.out.println(" You are now in the " + this.name + "!");
+
+        if(this.pioneers.size() > 0){
+            System.out.println("Who is currently here?");
+            for (Pioneer p: this.pioneers){
+                System.out.println(p.getName());
+
+            }
+        }
+
+        else {
+            System.out.println("There is no-one here! Go somewhere else.");
+        }
+        
+
+    }
+
     public boolean moveIn(Pioneer p){
-        if (this.party_participants.contains(p)){
+        if (this.pioneers.contains(p)){
             throw new RuntimeException(p + "is already in this location!"); // Already here
         }  //Checks for beef
-            for (Pioneer a: p.Beefs){
-                if(this.party_participants.contains(a)){
+            for (Pioneer a: p.Beefs.keySet()){
+                if(this.pioneers.contains(a)){
                     System.out.println(p + " says: I am not going there because " + a + "is already there!");
                     return false; 
                 }
             }
             //Moves pioneer
-            this.party_participants.add(p);
-            p.getLocation().moveOut(p);
+            this.pioneers.add(p);
+            if (p.getLocation() != this){
+                p.getLocation().moveOut(p);
+            }
             p.setLocation(this);
             return true;
 
     }
 
+    public void talkTo(Pioneer p){
+        if (this.pioneers.contains(p)){
+            System.out.println(p.getBio());
+
+        }
+        else {
+            System.out.println("There is no one to talk to");
+        }
+    }
+
     public void moveOut(Pioneer p){
-        if (this.party_participants.contains(p)){
-            this.party_participants.remove(p);
+        if (this.pioneers.contains(p)){
+            this.pioneers.remove(p);
         }   else {
             throw new RuntimeException("Can't remove" + p + "from this location!");
         }

@@ -4,13 +4,15 @@ import java.util.Hashtable;
 public class Pioneer {
     
     public String name;
+    public String stage_name;
     public String bio;
-    Hashtable<Pioneer, Beef> Beefs;
+    public Hashtable<Pioneer, Beef> Beefs;
     public String element;
     private Location currentLocation;
 
-    public Pioneer( String name, String element, String bio, Location currentLocation){
+    public Pioneer( String name, String stage_name, String element, String bio, Location currentLocation){
         this.name = name;
+        this.stage_name = stage_name;
         this.element = element;
         this.bio = bio;
         this.currentLocation = currentLocation;
@@ -29,7 +31,7 @@ public class Pioneer {
     }
  
     public String getName(){
-        return this.name;
+        return this.stage_name + " AKA " + this.name;
     }
 
     public String getElement(){
