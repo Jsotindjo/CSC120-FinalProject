@@ -166,12 +166,12 @@ public class Game {
     
         }
 
-        while (response.equalsIgnoreCase("p") ){
-            response = input.nextLine();
+        // while (response.equalsIgnoreCase("p") ){
+        //     response = input.nextLine();
     
-            if (DJ_Kool_Herc.getLocation() != currentLocation))){
+        //     if (DJ_Kool_Herc.getLocation() != currentLocation))){
 
-            }
+        //     }
 
        
 
