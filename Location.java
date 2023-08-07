@@ -28,21 +28,26 @@ public class Location {
     }
 
     public void printLocation(){
-        System.out.println(" You are now in the " + this.name + "!");
+        System.out.println("You are now in the " + this.name + "!");
+        
+    }
+
+    public void printPioneers(){
 
         if(this.pioneers.size() > 0){
-            System.out.println("Who is currently here?");
             for (Pioneer p: this.pioneers){
-                System.out.println(p.getName());
+                System.out.println(p.getName() + "is here!");
 
             }
-        }
 
-        else {
-            System.out.println("There is no-one here! Go somewhere else.");
         }
         
 
+        else {
+            System.out.println("There is no-one here! Go somewhere else. Click L for left and R for right");
+        }
+
+        
     }
 
     public boolean moveIn(Pioneer p){
@@ -90,6 +95,10 @@ public class Location {
     public void setRight(Location r){
         this.right = r;
 
+    }
+
+    public String toString(){
+        return name;
     }
 
 

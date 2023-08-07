@@ -34,6 +34,7 @@ public class Pioneer {
         return this.stage_name + " AKA " + this.name;
     }
 
+
     public String getElement(){
         return this.element;
     }

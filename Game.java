@@ -14,10 +14,13 @@ public class Game {
     }
 
     public static void printMenu(){
-        System.out.println("Here are your options!");
-        System.out.println("Go talk to a pioneer!" );
-        System.out.println("Move to another borough. Choose left or right");
-        System.out.println("Exit");
+        System.out.println("Here are your options:");
+        System.out.println("Type H to know your specific location.");
+        System.out.println("Type C to see who's here.");
+        System.out.println("Type P to speak to a pioneer.");
+        System.out.println("Type L to move to the borough on the left.");
+        System.out.println("Type R to move to the borough on the right.");
+        System.out.println("Type E to exit");
 
     }
 
@@ -45,19 +48,20 @@ public class Game {
         Location Lyte_House = new Location("Lyte_House", "Mind Your Business", Borough.Brooklyn);
         Location Da_Pink_House = new Location("Da Pink House", "Somewhere in Astoria", Borough.Queens);
         Location Campbell_Cave = new Location("The Campbell Cave", "Somewhere in Staten Island", Borough.Staten_Island);
-        Location Crazy_House = new Location("Crazy_House", "Harlem", Borough.Manhatttan);
+        Location Crazy_House = new Location("Crazy_House", "Harlem", Borough.Manhattan);
 
-        Party.setLeft(Da_Pink_House);
-        Lyte_House.setLeft(Campbell_Cave);
-        Campbell_Cave.setLeft(Da_Pink_House);
-        Da_Pink_House.setLeft(Campbell_Cave);
-        Crazy_House.setLeft(Lyte_House);
 
-        Party.setRight(Crazy_House);
-        Lyte_House.setRight(Crazy_House);
-        Da_Pink_House.setLeft(Party);
+        Party.setLeft(Crazy_House);
+        Lyte_House.setLeft(Da_Pink_House);
         Campbell_Cave.setLeft(Lyte_House);
-        Crazy_House.setLeft(Party);
+        Da_Pink_House.setLeft(Party);
+        Crazy_House.setLeft(Campbell_Cave);
+
+        Party.setRight(Da_Pink_House);
+        Lyte_House.setRight(Campbell_Cave);
+        Da_Pink_House.setRight(Lyte_House);
+        Campbell_Cave.setRight(Crazy_House);
+        Crazy_House.setRight(Party);
 
         Pioneer DJ_Kool_Herc = new Pioneer("Clive Campbell", "DJ Kool Herc", "DJing", "DJ Kool aka Clive Campbell is often considered the grandfather of Hip-Hop. He and his sister Cindy Campbell threw the Back 2 School Jam on August 11th of 1973 which is often reffered to as the birth of Hip-Hop. ", Party);
         Pioneer MC_Lyte = new Pioneer("Lana Michele Moorer", "MC_Lyte", "MCing", "MC Lyte is a female pioneer of Hip-Hop. She was the first female rapper to release a full album. ", Lyte_House);
@@ -88,55 +92,90 @@ public class Game {
         System.out.println(java.util.Arrays.asList(Borough.values()));
         String response = input.nextLine();
         Location currentLocation; 
+        Borough borough;
 
-        if( response.equalsIgnoreCase("the_bronx")){
+
+        if( response.equalsIgnoreCase("the bronx")){
             currentLocation = Party;
+            borough = Borough.The_Bronx;
+            
         }
         else if (response.equalsIgnoreCase("brooklyn")){
             currentLocation = Lyte_House;
+            borough = Borough.Brooklyn;
 
         }
         else if (response.equalsIgnoreCase("queens")){
             currentLocation = Da_Pink_House;
+            borough = Borough.Queens;
         }
-        else if (response.equalsIgnoreCase("staten_island")){
+        else if (response.equalsIgnoreCase("staten island")){
             currentLocation = Campbell_Cave;
+            borough = Borough.Staten_Island;
         }
         else if (response.equalsIgnoreCase("manhattan")){
             currentLocation = Crazy_House; 
+            borough = Borough.Manhattan;
         }
         else {
-            System.out.println(" I did not understand that! Starting in The Bronx") ;
+            System.out.println("I did not understand that! Starting in The Bronx");
             currentLocation = Party;
+            borough = Borough.The_Bronx;
         }
 
-        System.out.println("Welcome to " + currentLocation + "!" );
+        System.out.println("Welcome to " + borough + "!" );
         printMenu();
+        
 
-
-
-        while (!response.equalsIgnoreCase("exit") ){
+        while (!response.equalsIgnoreCase("e") ){
             response = input.nextLine();
             //process the response 
-        }
+            // if (response.equalsIgnoreCase("p"))
+            //     currentLocation.talkTo(Cindy_Campbell);
+            //     currentLocation.talkTo(DJ_Kool_Herc);
+            //     currentLocation.talkTo(Lady_Pink);
+            //     currentLocation.talkTo(Crazy_Legs);
+            //     currentLocation.talkTo(MC_Lyte);
 
-        if (response.equalsIgnoreCase("Talk to a pioneer")){
-            currentLocation.talkTo(Cindy_Campbell);
-        }
+            // }
 
-        if (response.equalsIgnoreCase("exit")){
+            if (response.equalsIgnoreCase("h")){
+                currentLocation.printLocation();
+            }
+
+            if (response.equalsIgnoreCase("c")){
+                currentLocation.printPioneers();
+            }
+
+            else if (response.equalsIgnoreCase("l")){
+                currentLocation.goLeft();
+                System.out.println("Welcome to the " + borough + "!" );
+                printMenu();
+                
+            }
+            else if (response.equalsIgnoreCase("r")){
+                currentLocation.goRight();
+                System.out.println("Welcome to the " + borough + "!");
+                printMenu();
+            }
+
+            else
             System.out.println("You have ended the game goodbye!");
-
-        }
-        else if (response.equalsIgnoreCase("Left")){
-            currentLocation.goLeft();
-            System.out.println(currentLocation);
-        }
-        else if (response.equalsIgnoreCase("Right")){
-            currentLocation.goRight();
-            System.out.println(currentLocation);
+            break;
+            
+    
         }
 
+        while (response.equalsIgnoreCase("p") ){
+            response = input.nextLine();
+    
+            if (DJ_Kool_Herc.getLocation() != currentLocation))){
+
+            }
+
+       
+
+        
         
         
 
