@@ -25,7 +25,6 @@ public class Game {
     }
 
 
-
     public static void main(String[] args) {
 
         //* Creates frame with flyer */
@@ -211,29 +210,29 @@ public class Game {
                 }
 
                 else{
-                    currentLocation.talkTo(currentLocation.pioneers.get(index:0));
+                    currentLocation.talkTo(currentLocation.pioneers.get(0));
                 }
             }
 
 
-            else if (response.equalsIgnoreCase("l")){
+             if (response.equalsIgnoreCase("l")){
                 currentLocation.goLeft();
                 System.out.println("Welcome to the " + borough + "!" );
                 printMenu();
                 
             }
-            else if (response.equalsIgnoreCase("r")){
+            if (response.equalsIgnoreCase("r")){
                 currentLocation.goRight();
                 System.out.println("Welcome to the " + borough + "!");
                 printMenu();
             }
 
-            else if (response.equalsIgnoreCase("e")){
+             if (response.equalsIgnoreCase("e")){
                 System.out.println("You have ended the game goodbye!");
                 break;
             }
 
-            else{
+            else {
                 System.out.println("I did not understand that");
                 printMenu();
             }
