@@ -76,7 +76,7 @@ public class Location {
 
         }
         else {
-            System.out.println("There is no one to talk to");
+            System.out.println("That pioneer is not here");
         }
     }
 

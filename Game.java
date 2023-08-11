@@ -44,6 +44,8 @@ public class Game {
 
         //Creates the locations
 
+
+
         Location Party = new Location("DJ Kool Herc's Party Location", "1520 Sedgewick Avenue", Borough.The_Bronx);
         Location Lyte_House = new Location("Lyte_House", "Mind Your Business", Borough.Brooklyn);
         Location Da_Pink_House = new Location("Da Pink House", "Somewhere in Astoria", Borough.Queens);
@@ -71,12 +73,67 @@ public class Game {
 
         String [] Cindy_Options = {"Have a good cry about it", "Have a conversation about the situation", "Silently fume about it."};
         Beef Cindy_Beef = new Beef("Cindy is mad at her brother because he took all the fame for the Back 2 School Jam in 1973", 1, Cindy_Options);
+        Cindy_Campbell.addAntagonist(DJ_Kool_Herc, Cindy_Beef);
+        Cindy_Beef.isResolved(1);
+        System.out.println(Cindy_Beef.getDescription());
+        int c = 0;
+        for (String o: Cindy_Beef.getPossibleActions()){
+            System.out.println(c+ ". " + o);
+            c++;
+        }
+
+        if (Cindy_Beef.isResolved(1)){
+            Cindy_Campbell.resolveBeef(DJ_Kool_Herc, Cindy_Beef);
+        }
+
+
+
         String [] Pink_Options = {"Help Cindy make a new and better mural", "Hack Crazy Legs' Youtube and erase a video", "Tell her it is not that big of a deal"};
         Beef Pink_Beef = new Beef("Lady Pink is upset with Crazy Legs because he ruined one of her murals while breaking", 0, Pink_Options);
+        Lady_Pink.addAntagonist(Crazy_Legs, Pink_Beef);
+        Pink_Beef.isResolved(0);
+        System.out.println(Pink_Beef.getDescription());
+        int p = 0;
+        for (String o: Cindy_Beef.getPossibleActions()){
+            System.out.println(p+ ". " + o);
+            p++;
+        }
+        if (Pink_Beef.isResolved(0)){
+            Lady_Pink.resolveBeef(Crazy_Legs, Pink_Beef);
+        }
+
+        
+
+
         String [] Crazy_Options = {"Make him a sandwich that is not as good", "Tell him to get over it", "Get MC Lyte to apologize with tears"};
         Beef Crazy_Beef = new Beef("MC Lyte ate Crazy Legs' favorite sandwich last week", 2, Crazy_Options);
+        Crazy_Legs.addAntagonist(MC_Lyte, Crazy_Beef);
+        Crazy_Beef.isResolved(2);
+        System.out.println(Crazy_Beef.getDescription());
+        int z = 0;
+        for (String o: Cindy_Beef.getPossibleActions()){
+            System.out.println(z+ ". " + o);
+            z++;
+        }
+        if (Pink_Beef.isResolved(2)){
+            Lady_Pink.resolveBeef(Crazy_Legs, Pink_Beef);
+        }
+
+        
         String [] Lyte_Options = {"Give her Cindy's long lost apology letter", "Give her a hug", "Have an unproductive conversation"};
         Beef Lyte_Beef = new Beef("Cindy left me to go to Staten Island and never explained", 0, Lyte_Options);
+        MC_Lyte.addAntagonist(Cindy_Campbell, Lyte_Beef);
+        Lyte_Beef.isResolved(0);
+        System.out.println(Lyte_Beef.getDescription());
+        int l = 0;
+        for (String o: Cindy_Beef.getPossibleActions()){
+            System.out.println(l+ ". " + o);
+            l++;
+        }
+        if (Pink_Beef.isResolved(0)){
+            Lady_Pink.resolveBeef(Crazy_Legs, Pink_Beef);
+        }
+        
 
 
         Party.moveIn(DJ_Kool_Herc); 
@@ -147,6 +204,18 @@ public class Game {
                 currentLocation.printPioneers();
             }
 
+            if(response.equalsIgnoreCase("p")){
+
+                if(currentLocation.pioneers.size() > 1){
+                    System.out.println("This is the party, no one wants to talk, go somewhere else!");
+                }
+
+                else{
+                    currentLocation.talkTo(currentLocation.pioneers.get(index:0));
+                }
+            }
+
+
             else if (response.equalsIgnoreCase("l")){
                 currentLocation.goLeft();
                 System.out.println("Welcome to the " + borough + "!" );
@@ -159,9 +228,19 @@ public class Game {
                 printMenu();
             }
 
-            else
-            System.out.println("You have ended the game goodbye!");
-            break;
+            else if (response.equalsIgnoreCase("e")){
+                System.out.println("You have ended the game goodbye!");
+                break;
+            }
+
+            else{
+                System.out.println("I did not understand that");
+                printMenu();
+            }
+
+            
+
+               
             
     
         }
