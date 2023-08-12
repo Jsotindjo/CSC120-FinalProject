@@ -199,11 +199,11 @@ public class Game {
                 currentLocation.printLocation();
             }
 
-            if (response.equalsIgnoreCase("c")){
+            else if (response.equalsIgnoreCase("c")){
                 currentLocation.printPioneers();
             }
 
-            if(response.equalsIgnoreCase("p")){
+            else if(response.equalsIgnoreCase("p")){
 
                 if(currentLocation.pioneers.size() > 1){
                     System.out.println("This is the party, no one wants to talk, go somewhere else!");
@@ -215,27 +215,31 @@ public class Game {
             }
 
 
-             if (response.equalsIgnoreCase("l")){
+            else if (response.equalsIgnoreCase("l")){
                 currentLocation.goLeft();
                 System.out.println("Welcome to the " + borough + "!" );
                 printMenu();
                 
             }
-            if (response.equalsIgnoreCase("r")){
+
+            else if (response.equalsIgnoreCase("r")){
                 currentLocation.goRight();
                 System.out.println("Welcome to the " + borough + "!");
                 printMenu();
-            }
 
-             if (response.equalsIgnoreCase("e")){
+            } 
+
+            else if (response.equalsIgnoreCase("e")){
                 System.out.println("You have ended the game goodbye!");
                 break;
             }
 
             else {
-                System.out.println("I did not understand that");
+                System.out.println("I did not understand that! Try again");
                 printMenu();
             }
+            
+            
 
             
 
